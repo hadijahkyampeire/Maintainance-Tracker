@@ -1,0 +1,82 @@
+.landing{
+    background-color: bisque;
+    height: 800px;
+}
+.circular-image {
+    border-radius:  50%;
+    float: right;
+    width:240px;
+    height: 270px;
+  }
+  #name{
+      display:block;
+      margin-right: 0px;
+      float: right;
+      margin-top: 0px;
+      text-align: center;
+      padding-top: 10px;
+      background-color: rgba(233, 225, 202, 0.794);
+      width:120px;
+      height: 30px;
+      border-radius: 20px
+  }
+#buttons{
+    margin-left: 500px;
+    padding-top: 300px;
+    
+}
+#btn-one{
+    background-color: rgba(238, 178, 12, 0.918);
+    border-color: orange;
+    width: 160px;
+    height: 60px;
+    border-radius: 20px;
+}
+#btn-one:hover{
+    background-color: whitesmoke;
+}
+#btn-two{
+    background-color:rgba(233, 225, 202, 0.794);
+    border-color: orange;
+    width: 160px;
+    height: 60px;
+    border-radius: 20px;
+}
+#btn-two:hover{
+    background-color: rgba(238, 178, 12, 0.918);
+}
+.topnav {
+    overflow: hidden;
+    background-color: orange;
+  }
+  
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: rgb(153, 134, 98);
+  }
+  
+  .topnav a.active {
+    background-color: rgba(207, 146, 32, 0.616);
+    color: white;
+  }
+  .intro{
+      display:block;
+      margin-left: 10px;
+      margin-top: 20px;
+      text-align: center;
+      padding-top: 10px;
+      background-color: rgba(233, 225, 202, 0.794);
+      width:550px;
+      height: 80px;
+      border-radius: 20px;
+      font-size: 110%;
+  }
