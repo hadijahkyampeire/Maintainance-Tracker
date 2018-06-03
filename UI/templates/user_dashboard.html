@@ -8,16 +8,17 @@
     <link rel="stylesheet" type="text/css" media="screen" href="../css/index.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/dashboard.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../css/signup.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="main.js"></script>
 </head>
 <body>
         <div class="landing">
                 <div class="topnav">
-                    <a class="active" href="#home">Home</a>
-                    <a href="#about">About Us</a>
+                    <a class="active" href="index.html">Home</a>
+                    <a href="User_accounts.html">Login</a>
                 </div>
         
-        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Add Request</button>
+        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="btn">Add Request</button>
         
         <div id="id01" class="modal">
           <form class="modal-content" action="/action_page.php">
@@ -32,7 +33,12 @@
               <input type="text" placeholder="Enter Description" name="description" required>
         
               <label for="department"><b>Department</b></label>
-              <input type="text" placeholder="Department" name="department" required>
+              <select name="departments">
+                <option value="it">IT</option>
+                <option value="operation">Operations</option>
+                <option value="transport">Transport</option>
+                <option value="facilities">Facilities</option>
+              </select>
               <div class="clearfix">
                 <button type="submit" class="requestbtn">Submit</button>
                 <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
@@ -60,13 +66,19 @@
                       <h4><b>Title: Mac failure</b></h4> 
                       <p>Description: My mac failed to boot</p> 
                       <p>Department: IT</p> 
+                      <hr/>
+                    <button><i class="fa fa-trash"> Delete</i></button>
+                  <button><i class="fa fa-edit"> Edit</i></button>
                     </div>
                   </div><br>
                   <div class="card">
-                        <div class="container">
-                          <h4><b>Title: Office Material</b></h4> 
-                          <p>Description: I need a book, pen and sticky notes to ease my learning</p> 
-                          <p>Department: Operations</p> 
+                    <div class="container">
+                      <h4><b>Title: Office Material</b></h4> 
+                      <p>Description: I need a book, pen and sticky notes to ease my learning</p> 
+                      <p>Department: Operations</p> 
+                      <hr/>
+                      <button><i class="fa fa-trash"> Delete</i></button>
+                      <button><i class="fa fa-edit"> Edit</i></button>
                         </div>
                       </div>
         </div>
