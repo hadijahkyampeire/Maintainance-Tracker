@@ -17,7 +17,7 @@ input[type=text]:focus, input[type=password]:focus {
 }
 
 /* Set a style for all buttons */
-button {
+.btn {
     background-color: rgb(226, 200, 48);
     color: white;
     padding: 14px 20px;
@@ -32,7 +32,7 @@ button {
     font-size: 100%;
 }
 
-button:hover {
+.btn:hover {
     opacity:1;
 }
 
