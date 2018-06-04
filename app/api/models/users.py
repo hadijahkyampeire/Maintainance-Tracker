@@ -10,12 +10,11 @@ class User:
     Class to represent the User model
     """
 
-    def __init__(self, name, email, password, isAdmin):
+    def __init__(self, username, email, password):
         self.id = uuid.uuid4().int
-        self.name = name
+        self.username = username
         self.email = email
         self.password = password
-        self.isAdmin = isAdmin
 
     def json(self):
         """
@@ -24,14 +23,13 @@ class User:
 
         return json.dumps({
             'id': self.id,
-            'name': self.name,
+            'name': self.username,
             'email': self.email,
-            'password': self.password,
-            'isAdmin': self.isAdmin
+            'password': self.password
         })
 
 
-def generate_token(user_id, isAdmin):
+def generate_token(user_id):
     """Generates the access token to be used as the Authorization header"""
 
     try:
@@ -41,8 +39,7 @@ def generate_token(user_id, isAdmin):
             # international atomic time
             'iat': datetime.utcnow(),
             # default  to user id
-            'sub': user_id,
-            'isAdmin': isAdmin
+            'sub': user_id
         }
         # create the byte string token using the payload and the SECRET key
         jwt_string = jwt.encode(
@@ -61,7 +58,7 @@ def decode_token(token):
     """Decode the access token to get the payload and return user_id and isAdmin field results"""
     try:
         payload = jwt.decode(token, current_app.config.get('SECRET_KEY'))
-        return {"id": payload['sub'], "isAdmin": payload['isAdmin'], "status": "Success"}
+        return {"id": payload['sub'], "status": "Success"}
     except jwt.ExpiredSignatureError:
         return {"status": "Failure", "message": "Expired token. Please log in to get a new token"}
     except jwt.InvalidTokenError:

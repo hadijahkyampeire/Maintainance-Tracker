@@ -1,4 +1,5 @@
 from app import app
+from app.api.user import views
 
 @app.route('/', methods=['GET'])
 def index():

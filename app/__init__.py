@@ -12,3 +12,8 @@ def create_app():
 app = create_app()
 # load from config.py in root folder
 app.config.from_object(app_config["development"])
+
+from .api.user import user
+app.register_blueprint(user)
+from .api.request import request
+app.register_blueprint(request)
