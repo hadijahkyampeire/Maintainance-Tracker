@@ -25,19 +25,19 @@ class Signup(Resource):
         password = args['password']
 
         if username.strip() == "" or len(username.strip()) < 2:
-            return make_response(jsonify({"message": "invalid, Enter name please"}), 401)
+            return make_response(jsonify({"message": "invalid, Enter name please"}), 400)
 
         if re.compile('[!@#$%^&*:;?><.0-9]').match(username):
-            return make_response(jsonify({"message": "Invalid characters not allowed"}))
+            return make_response(jsonify({"message": "Invalid characters not allowed"}), 400)
 
         if not re.match(r"([\w\.-]+)@([\w\.-]+)(\.[\w\.]+$)", email):
-            return make_response(jsonify({"message": "Enter valid email "}), 401)
+            return make_response(jsonify({"message": "Enter valid email"}), 400)
 
         if password.strip() == "":
-            return make_response(jsonify({"message": "Enter password"}), 401)
+            return make_response(jsonify({"message": "Enter password"}), 400)
 
         if len(password) < 5:
-            return make_response(jsonify({"message": "Password is too short, < 5"}), 401)
+            return make_response(jsonify({"message": "Password is too short, < 5"}), 400)
 
         new_user = User(username, email, password)
 
@@ -70,25 +70,25 @@ class Login(Resource):
                                               }), 200)
         return make_response(jsonify({"message": "wrong credentials"}), 401)
 
-class AdminLogin(Resource):
-    def post(self):
-        """
-        Allows users to login to their accounts
-        """
-        parser = reqparse.RequestParser()
-        parser.add_argument('username', type=str, required=True)
-        parser.add_argument('password', type=str, required=True)
+# class AdminLogin(Resource):
+#     def post(self):
+#         """
+#         Allows users to login to their accounts
+#         """
+#         parser = reqparse.RequestParser()
+#         parser.add_argument('username', type=str, required=True)
+#         parser.add_argument('password', type=str, required=True)
 
-        args = parser.parse_args()
-        username = args['username']
-        password = args['password']
+#         args = parser.parse_args()
+#         username = args['username']
+#         password = args['password']
 
-        for user in users_list:
-            if username == user['admin'] and password == user['Admin123']:
-                access_token = "{}".format(
-                    generate_token(user['id']))
-                return make_response(jsonify({"token": access_token,
-                                              "message": "User logged in successfully"
-                                              }), 200)
-        return make_response(jsonify({"message": "wrong credentials"}), 401)
+#         for user in users_list:
+#             if username == user['admin'] and password == user['Admin123']:
+#                 access_token = "{}".format(
+#                     generate_token(user['id']))
+#                 return make_response(jsonify({"token": access_token,
+#                                               "message": "User logged in successfully"
+#                                               }), 200)
+#         return make_response(jsonify({"message": "wrong credentials"}), 401)
 

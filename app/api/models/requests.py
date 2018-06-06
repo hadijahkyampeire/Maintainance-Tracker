@@ -3,8 +3,8 @@ import json
 
 
 class Request:
-    def __init__(self, title, description, department):
-        self.id = uuid.uuid4().hex
+    def __init__(self, id, title, description, department):
+        self.id = id
         self.title= title
         self.description = description
         self.department = department

@@ -1,0 +1,32 @@
+[report]=
+show_missing = True
+omit = 
+      *api/songs/models*
+      */site-packages/*
+      *markupsafe/*
+      *psycopg2/*
+      *six.py*
+      *sqlalchemy/*
+      *werkzeug/*
+      *stringprep.py*
+      *uuid.py*
+      *ctypes/*
+      *decimal.py*
+      *encodings/*
+      *hmac.py*
+      *asyncio/*
+      *concurrent/*
+      *multiprocessing/*
+      *mimetypes.py*
+      *numbers.py*
+      *pydoc.py*
+      *http/*
+      *app/api/user/__init__.py*
+      *app/api/request/__init__.py*
+      *app/api/__init__.py*
+      *app/__init__.py*
+      *app/config.py*
+      *app/api/models/*
+      *tests/*
+      *html/*
+      *typing.py*

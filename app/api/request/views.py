@@ -12,6 +12,7 @@ from app.api.models.users import decode_token
 
 request_list=[]
 class AddRequest(Resource):
+    id=0
     def post(self):
         """
         Allows authenticated user to make an request from the menu
@@ -39,14 +40,19 @@ class AddRequest(Resource):
 
                 if re.compile('[!@#$%^&*:;?><.0-9]').match(title):
                     return make_response(jsonify({"message": "Invalid characters not allowed"}), 401)
+                
+                global id
+                if len(request_list)==0:
+                    id = len(request_list)+1
+                else:
+                    id = id+1
 
-                new_request = Request(title, description, department)
+                new_request = Request(id, title, description, department)
 
                 for request in request_list:
-                    if title == request['title'] and request['id'] == decoded['id']:
+                    if title == request['title']:
                         return make_response(jsonify({"message": 'Request title already exists'}), 400)
                 request = json.loads(new_request.json())
-                request['id'] = decoded['id']
                 request_list.append(request)
                 return make_response(jsonify({
                     'message': 'Request successfully created and sent',
@@ -75,7 +81,7 @@ class EditRequest(Resource):
             return make_response(jsonify({"message": decoded["message"]}), 400)
 
         for request in request_list:
-            if request['id'] == request_id:
+            if int(request['id']) == int(request_id):
                 if request["user_id"] == decoded["id"]:
                     args = parser.parse_args()
                     request['title'] = args['title']
@@ -130,7 +136,7 @@ class GetOneRequest(Resource):
         if decoded["status"] == "Failure":
             return make_response(jsonify({"message": decoded["message"]}), 400)
         for request in request_list:
-            if request['id'] == request_id:
+            if int(request['id']) == int(request_id):
                 requests_data = {
                         "id": request["id"],
                         "title": request['title'],
@@ -139,4 +145,4 @@ class GetOneRequest(Resource):
                     }
                 return make_response(jsonify({"requests": requests_data,
                                     "status": "success"}), 200)
-            return make_response(jsonify({"message": "No requests found"}), 404)
+        return make_response(jsonify({"message": "No requests found"}), 404)
