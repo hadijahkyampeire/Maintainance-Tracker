@@ -27,6 +27,25 @@ class Tests_Requests(BaseTestCase):
             response = self.get_requests(token)
             self.assertEqual(response.status_code, 200)
 
+    def test_add_request_with_no_token(self):
+        """Tests when the requests are submitted successfully"""
+        with self.client:
+            self.register_user("hadijah", "had@gmail.com", "12345")
+            token = ""
+            response = self.add_request(token)
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 401)
+            self.assertEqual(data.get('message'), "Token is missing")
+
+    def test_gets_all_requests_with_no_token(self):
+        """Tests when the requests are submitted successfully"""
+        with self.client:
+            self.register_user("hadijah", "had@gmail.com", "12345")
+            token = ""
+            response = self.get_requests(token)
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 401)
+            self.assertEqual(data.get('message'), "Token is missing")
     # def test_get_one_request(self):
     #     """Tests when one request is retrieved successfully"""
     #     with self.client:

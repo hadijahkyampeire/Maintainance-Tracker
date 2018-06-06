@@ -31,6 +31,18 @@ class Test_auth(BaseTestCase):
             self.assertEqual(data.get('message'),
                              "User logged in successfully")
 
+    def test_wrong_credentials_on_login(self):
+        """
+        Test a user logs in with wrong credentials
+        """
+        with self.client:
+            self.register_user("hadijah", "had@gmail.com", "12345")
+            response = self.login_user("dija@gmail.com", "1234509")
+            data = json.loads(response.data.decode())
+            self.assertEqual(response.status_code, 401)
+            self.assertEqual(data.get('message'),
+                             "wrong credentials")
+
     def test_invalid_username_onsignup(self):
         """Test when a user registers with an invalid username"""
         with self.client:
