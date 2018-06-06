@@ -25,7 +25,7 @@ class AddRequest(Resource):
         parser.add_argument('token', location='headers')
         args = parser.parse_args()
         if not args['token']:
-            return make_response(jsonify({"message": "Token is missing"}), 400)
+            return make_response(jsonify({"message": "Token is missing"}), 401)
         decoded = decode_token(args['token'])
         if decoded["status"] == "Failure":
             return make_response(jsonify({"message": decoded["message"]}), 400)
@@ -102,7 +102,7 @@ class GetRequests(Resource):
         parser.add_argument('token', location='headers')
         args = parser.parse_args()
         if not args['token']:
-            return make_response(jsonify({"message": "Token is missing"}), 400)
+            return make_response(jsonify({"message": "Token is missing"}), 401)
         decoded = decode_token(args['token'])
         if decoded["status"] == "Failure":
             return make_response(jsonify({"message": decoded["message"]}), 400)
