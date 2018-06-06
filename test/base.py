@@ -60,7 +60,7 @@ class BaseTestCase(unittest.TestCase):
         data = json.loads(response.data.decode())
         return data['token']
 
-    def add_request(self, token):
+    def add_request(self, token, title, description, department):
         """
         Function to create a request
         """
@@ -68,9 +68,9 @@ class BaseTestCase(unittest.TestCase):
             'api/v1/requests',
             data=json.dumps(
                 dict(
-                    title="mac failure",
-                    description="just failed",
-                    department="IT"
+                    title=title,
+                    description=description,
+                    department=department
                 )
             ),
             content_type='application/json',
@@ -88,13 +88,13 @@ class BaseTestCase(unittest.TestCase):
         """
         return self.client.get('api/v1/requests/{}'.format(id), headers=({"token": token}))
 
-    def put_request(self, token):
+    def put_request(self, token, title, description, department):
         """
         function to edit a request
         """
         return self.client.put('api/v1/requests/{}'.format(id),
                                data=json.dumps(dict(
-                                   title="mac failure",
-                                    description="just failed",
-                                    department="IT")),
+                                   title=title,
+                                    description=description,
+                                    department=department)),
                              content_type='application/json', headers=({"token": token}))
