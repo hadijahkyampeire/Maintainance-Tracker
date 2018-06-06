@@ -28,7 +28,7 @@ class AddRequest(Resource):
             return make_response(jsonify({"message": "Token is missing"}), 401)
         decoded = decode_token(args['token'])
         if decoded["status"] == "Failure":
-            return make_response(jsonify({"message": decoded["message"]}), 400)
+            return make_response(jsonify({"message": decoded["message"]}), 401)
 
         for user in users_list:
             if user['id'] == decoded['id']:
@@ -36,10 +36,10 @@ class AddRequest(Resource):
                 description = args['description']
                 department= args['department']
                 if title.strip() == "" or len(title.strip()) < 2:
-                    return make_response(jsonify({"message": "invalid, Enter title please"}), 401)
+                    return make_response(jsonify({"message": "Title should be more than 2 letters"}), 400)
 
                 if re.compile('[!@#$%^&*:;?><.0-9]').match(title):
-                    return make_response(jsonify({"message": "Invalid characters not allowed"}), 401)
+                    return make_response(jsonify({"message": "Invalid characters not allowed"}), 400)
                 
                 global id
                 if len(request_list)==0:
@@ -58,7 +58,6 @@ class AddRequest(Resource):
                     'message': 'Request successfully created and sent',
                     'status': 'success'},
                 ), 201)
-            return make_response(jsonify({"message": "User can not send request"}), 401)
         return make_response(jsonify({"message": "Doesn't exist, Create an account please"}), 401)
 
 
@@ -75,20 +74,18 @@ class EditRequest(Resource):
         parser.add_argument('department', type=str, required=True)
         args = parser.parse_args()
         if not args['token']:
-            return make_response(jsonify({"message": "Token is missing"}), 400)
+            return make_response(jsonify({"message": "Token is missing"}), 401)
         decoded = decode_token(args['token'])
         if decoded["status"] == "Failure":
-            return make_response(jsonify({"message": decoded["message"]}), 400)
+            return make_response(jsonify({"message": decoded["message"]}), 401)
 
         for request in request_list:
             if int(request['id']) == int(request_id):
-                if request["user_id"] == decoded["id"]:
-                    args = parser.parse_args()
-                    request['title'] = args['title']
-                    request['description'] = args['description']
-                    request['department'] = args['department']
-                    return make_response(jsonify({"message": "request updated succesfully"}), 200)
-                return make_response(jsonify({"message": "You can not update that request"}), 401)
+                args = parser.parse_args()
+                request['title'] = args['title']
+                request['description'] = args['description']
+                request['department'] = args['department']
+                return make_response(jsonify({"message": "request updated succesfully"}), 201)
         return make_response(jsonify({"message": "request not found"}), 404)
 
 
@@ -105,7 +102,7 @@ class GetRequests(Resource):
             return make_response(jsonify({"message": "Token is missing"}), 401)
         decoded = decode_token(args['token'])
         if decoded["status"] == "Failure":
-            return make_response(jsonify({"message": decoded["message"]}), 400)
+            return make_response(jsonify({"message": decoded["message"]}), 401)
         my_requests = []
         for request in request_list:
             requests_data = {
@@ -131,10 +128,10 @@ class GetOneRequest(Resource):
         parser.add_argument('token', location='headers')
         args = parser.parse_args()
         if not args['token']:
-            return make_response(jsonify({"message": "Token is missing"}), 400)
+            return make_response(jsonify({"message": "Token is missing"}), 401)
         decoded = decode_token(args['token'])
         if decoded["status"] == "Failure":
-            return make_response(jsonify({"message": decoded["message"]}), 400)
+            return make_response(jsonify({"message": decoded["message"]}), 401)
         for request in request_list:
             if int(request['id']) == int(request_id):
                 requests_data = {
