@@ -11,7 +11,7 @@ class Request:
 
     def json(self):
         """
-        json representation of the Order model
+        json representation of the Request model
         """
         return json.dumps({
             'id': self.id,
