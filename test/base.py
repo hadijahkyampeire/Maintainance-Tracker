@@ -65,7 +65,7 @@ class BaseTestCase(unittest.TestCase):
         Function to create a request
         """
         return self.client.post(
-            'api/v1/requests',
+            'api/v1/users/requests',
             data=json.dumps(
                 dict(
                     title=title,
@@ -80,19 +80,19 @@ class BaseTestCase(unittest.TestCase):
         """
         function to return get
         """
-        return self.client.get('api/v1/requests', headers=({"token": token}))
+        return self.client.get('api/v1/users/requests', headers=({"token": token}))
 
     def get_one_request(self, token):
         """
         function to return get
         """
-        return self.client.get('api/v1/requests/{}'.format(id), headers=({"token": token}))
+        return self.client.get('api/v1/users/requests/{}'.format(id), headers=({"token": token}))
 
     def put_request(self, token, title, description, department):
         """
         function to edit a request
         """
-        return self.client.put('api/v1/requests/{}'.format(id),
+        return self.client.put('api/v1/users/requests/{}'.format(id),
                                data=json.dumps(dict(
                                    title=title,
                                     description=description,
